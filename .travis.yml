@@ -33,8 +33,6 @@ after_success:
 addons:
   artifacts:
     debug: true
-    paths: [$DFB_PROJECT_DIR/target/jacoco.exec, $DFB_PROJECT_DIR/env.file]
-    target_paths: [$DFB_AWS_BUILD_PATH]
 
 notifications:
  webhooks:
