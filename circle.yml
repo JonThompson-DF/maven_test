@@ -18,8 +18,11 @@ dependencies:
     - wget https://s3.amazonaws.com/external-ci-artifacts/agents/dfbuild-agent-ext.jar
 
 test:
-  pre:
+  override:
+    - mvn clean compile
     - unset JAVA_TOOL_OPTIONS
+    - mvn test
+
 
 #general:
 #  artifacts:
