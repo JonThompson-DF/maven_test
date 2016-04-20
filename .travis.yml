@@ -36,9 +36,9 @@ after_success:
   - ./afterbuild.sh
 
 addons:
-  artifacts: true
-    paths:
-      -$DFB_PROJECT_DIR/target/jacoco.exec
+  artifacts:
+    debug: true
+    paths: [$DFB_PROJECT_DIR/target/jacoco.exec]
 
 notifications:
  webhooks:
