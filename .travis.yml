@@ -26,7 +26,7 @@ script:
   - mvn clean compile
 
 after_success:
-  - unset JAVA_TOOL_OPTIONS # unset because df agent interferes in the execution of jacoco agent
+  - unset JAVA_TOOL_OPTIONS # unset because jacoco agent conflicts with dfagent
   - env > target/env.file
   - mvn test
 
