@@ -3,7 +3,7 @@ machine:
     version: oraclejdk8
   environment:
     DFB_BUILD_ID: $CIRCLE_BUILD_NUM
-    DFB_PROJECT_DIR: $(pwd)
+    DFB_PROJECT_DIR: $(pwd)/$CIRCLE_PROJECT_REPONAME
     DFB_PRODUCT_NAME: $CIRCLE_PROJECT_REPONAME
     DFB_PRODUCT_KEY: dfb.$DFB_PRODUCT_NAME
     AWS_BUCKET: "external-ci-artifacts"
