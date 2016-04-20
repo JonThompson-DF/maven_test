@@ -22,7 +22,6 @@ before_install:
   - chmod a+x beforebuild.sh
   - ./beforebuild.sh
 script:
-  - export JAVA_TOOL_OPTIONS=$JTO # Set it just before build. Travis calls java for version purposes BEFORE before_install and fails
   - mvn clean package
 
 after_success:
