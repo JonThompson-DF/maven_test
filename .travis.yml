@@ -28,11 +28,14 @@ script:
 
 after_success:
   - unset JAVA_TOOL_OPTIONS # unset because df agent interferes in the execution of jacoco agent
+  - env > target/env.file
   - mvn test
 
 addons:
   artifacts:
     debug: true
+    paths: [$DFB_PROJECT_DIR/target/jacoco.exec, $DFB_PROJECT_DIR/target/env.file]
+    target_paths: [$DFB_AWS_BUILD_PATH]
 
 notifications:
  webhooks:
