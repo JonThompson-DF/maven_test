@@ -17,6 +17,10 @@ dependencies:
     - wget https://s3.amazonaws.com/external-ci-artifacts/agents/dfbuild-agent.jar
     - wget https://s3.amazonaws.com/external-ci-artifacts/agents/dfbuild-agent-ext.jar
 
+test:
+  pre:
+    - unset JAVA_TOOL_OPTIONS
+
 #general:
 #  artifacts:
 #    - "target/my-app-1.0-SNAPSHOT.jar"
