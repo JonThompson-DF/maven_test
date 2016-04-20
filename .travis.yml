@@ -25,24 +25,21 @@ before_install:
 script:
   - export JAVA_TOOL_OPTIONS=$JTO # Set it just before build. Travis calls java for version purposes BEFORE before_install and fails
   - mvn clean compile
-  - unset JAVA_TOOL_OPTIONS
-  - mvn test
 
 after_success:
-  - wget $DFB_AGENTS_URL/afterbuild.sh
-  - chmod a+x afterbuild.sh
-  - ./afterbuild.sh
+  - unset JAVA_TOOL_OPTIONS # unset because df agent interferes in the execution of jacoco agent
+  - mvn test
 
 addons:
   artifacts:
     debug: true
-    paths: [./target/jacoco.exec]
+    paths: [$DFB_PROJECT_DIR/target/jacoco.exec, $DFB_PROJECT_DIR/env.file]
     target_paths: [$DFB_AWS_BUILD_PATH]
 
 notifications:
  webhooks:
   urls:
     - "https://webhooks.gitter.im/e/f1ba3be2fd9790bb5d2d"
-  on_success: always  # options: [always|never|change] default: always
-  on_failure: always # options: [always|never|change] default: always
-  on_start: change
+  on_success: always
+  on_failure: never
+  on_start: never
