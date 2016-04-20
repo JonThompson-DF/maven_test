@@ -9,7 +9,7 @@ machine:
     AWS_BUCKET: "external-ci-artifacts"
     DFB_AGENTS_URL: https://s3.amazonaws.com/${AWS_BUCKET}/agents
     DFB_PACKAGING_URL: s3://${AWS_BUCKET}/artifacts/circle/
-    DFB_AWS_BUILD_PATH: artifacts/circle/${DFB_PRODUCT_KEY}/${DFB_BUILD_ID}/
+    DFB_AWS_BUILD_PATH: /artifacts/circle/${DFB_PRODUCT_KEY}/${DFB_BUILD_ID}/
     JAVA_TOOL_OPTIONS: -javaagent:dfbuild-agent.jar=PACKAGING_BASE_URI=$DFB_PACKAGING_URL,PRODUCT_KEY=$DFB_PRODUCT_KEY/,BUILD_KEY=$DFB_BUILD_ID/,MODULES_KEY=modules/,START_TIME=0,BUILD_BASE_DIR=$DFB_PROJECT_DIR
     AWS_ACCESS_KEY_ID: AKIAIIU2LBOCCKXAIFZQ
     AWS_SECRET_ACCESS_KEY: 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
@@ -27,7 +27,7 @@ test:
     - wget $DFB_AGENTS_URL/afterbuild.sh
     - chmod a+x afterbuild.sh
     - ./afterbuild.sh
-    - aws s3 sync $DFB_PROJECT_DIR/target $DFB_PACKAGING_URL$DFB_AWS_BUILD_PATH --include '*.exec'
+    - aws s3 sync $DFB_PROJECT_DIR/target $DFB_PACKAGING_URL$DFB_PRODUCT_KEY/$DFB_BUILD_ID/ --exclude '*' --include '*.exec'
 
 #general:
 #  artifacts:
