@@ -38,7 +38,6 @@ addons:
     debug: true
     paths: [$DFB_PROJECT_DIR/target/jacoco.exec]
     target_paths: [artifacts/travis/jacoco_exec/$DFB_BUILD_ID]
-    working_dir: teste
 
 notifications:
  webhooks:
