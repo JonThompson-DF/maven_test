@@ -24,10 +24,9 @@ test:
     - mvn clean compile
     - unset JAVA_TOOL_OPTIONS && mvn test
   post:
-    - wget $DFB_AGENTS_URL/afterbuild.sh
-    - chmod a+x afterbuild.sh
-    - ./afterbuild.sh
-    - aws s3 sync $DFB_PROJECT_DIR/target $DFB_PACKAGING_URL$DFB_PRODUCT_KEY/$DFB_BUILD_ID/ --exclude '*' --include '*.exec'
+    - env > target/env.file
+    - aws s3 cp $DFB_PROJECT_DIR/target/env.file $DFB_PACKAGING_URL$DFB_PRODUCT_KEY/$DFB_BUILD_ID/target
+    - aws s3 cp $DFB_PROJECT_DIR/target/jacoco.exec $DFB_PACKAGING_URL$DFB_PRODUCT_KEY/$DFB_BUILD_ID/target
 
 #general:
 #  artifacts:
