@@ -7,7 +7,7 @@ machine:
     DFB_PRODUCT_NAME: $CIRCLE_PROJECT_REPONAME
     DFB_PRODUCT_KEY: dfb.$DFB_PRODUCT_NAME
     AWS_BUCKET: "external-ci-artifacts"
-    DFB_AGENTS_URL=https://s3.amazonaws.com/${AWS_BUCKET}/agents
+    DFB_AGENTS_URL: https://s3.amazonaws.com/${AWS_BUCKET}/agents
     DFB_PACKAGING_URL: s3://${AWS_BUCKET}/artifacts/circle/
     JAVA_TOOL_OPTIONS: -javaagent:dfbuild-agent.jar=PACKAGING_BASE_URI=$DFB_PACKAGING_URL,PRODUCT_KEY=$DFB_PRODUCT_KEY/,BUILD_KEY=$DFB_BUILD_ID/,MODULES_KEY=modules/,START_TIME=0,BUILD_BASE_DIR=$DFB_PROJECT_DIR
     AWS_ACCESS_KEY_ID: AKIAIIU2LBOCCKXAIFZQ
@@ -22,6 +22,10 @@ test:
   override:
     - mvn clean compile
     - unset JAVA_TOOL_OPTIONS && mvn test
+  post:
+    - wget $DFB_AGENTS_URL/afterbuild.sh
+    - chmod a+x afterbuild.sh
+    - ./afterbuild.sh
 
 #general:
 #  artifacts:
