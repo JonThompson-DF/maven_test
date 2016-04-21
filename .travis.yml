@@ -13,6 +13,7 @@ env:
     - DFB_AGENTS_URL=https://s3.amazonaws.com/${AWS_BUCKET}/agents
     - DFB_PACKAGING_URL=s3://${AWS_BUCKET}/artifacts/travis/
     - DFB_AWS_BUILD_PATH=/artifacts/travis/${DFB_PRODUCT_KEY}/${DFB_BUILD_ID}/
+    - DFB_TARGET_PATH=/artifacts/travis/${DFB_PRODUCT_KEY}/${DFB_BUILD_ID}/target/
     - AWS_ACCESS_KEY_ID=AKIAIIU2LBOCCKXAIFZQ
     - AWS_SECRET_ACCESS_KEY=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
     - JTO=-javaagent:dfbuild-agent.jar=PACKAGING_BASE_URI=$DFB_PACKAGING_URL,PRODUCT_KEY=$DFB_PRODUCT_KEY/,BUILD_KEY=$DFB_BUILD_ID/,MODULES_KEY=modules/,START_TIME=0,BUILD_BASE_DIR=$DFB_PROJECT_DIR
@@ -27,14 +28,16 @@ script:
 
 after_success:
   - unset JAVA_TOOL_OPTIONS # unset because jacoco agent conflicts with dfagent
-  - env > target/env.file
+  - env > env.file
   - mvn test
 
 addons:
   artifacts:
     debug: true
-    paths: [$DFB_PROJECT_DIR/target/jacoco.exec, $DFB_PROJECT_DIR/target/env.file]
-    target_paths: [$DFB_AWS_BUILD_PATH]
+    paths:
+      - $DFB_PROJECT_DIR/env.file
+      - $(git ls-files -oi -x *.exec | tr "\n" ":")
+    target_paths: $DFB_TARGET_PATH
     bucket: $AWS_BUCKET
 
 notifications:
