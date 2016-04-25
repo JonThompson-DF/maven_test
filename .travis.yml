@@ -43,7 +43,7 @@ addons:
 notifications:
  webhooks:
   urls:
-    - "https://webhooks.gitter.im/e/f1ba3be2fd9790bb5d2d"
+    - "http://df-sdk-feed-dev.us-east-1.elasticbeanstalk.com/webhooks/travis"
   on_success: always
   on_failure: never
   on_start: never
