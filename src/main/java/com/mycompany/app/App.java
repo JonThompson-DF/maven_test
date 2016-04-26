@@ -3,7 +3,7 @@ package com.mycompany.app;
 import java.util.Random;
 
 public class App {
-    public String method(int num) {
+    public String method1(int num) {
         if (num > 7)
             return "More than 7";
 
