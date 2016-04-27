@@ -38,7 +38,7 @@ addons:
     debug: true
     paths:
       - $DFB_PROJECT_DIR/env.file
-      - $(git ls-files -oi -x *.exec | tr "\n" ":")
+      - $(ls -R | grep .exec | tr "\n" ":")
     target_paths: $DFB_AWS_BUILD_PATH
     bucket: $AWS_BUCKET
 
