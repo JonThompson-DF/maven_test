@@ -11,14 +11,17 @@ public class App {
         return "Less than 7";
     }
 
-    public static int doInt() {
+    public int doInt() {
+        return new Random().nextInt(8);
+    }
+
+    public int doAnotherInt() {
         return new Random().nextInt(8);
     }
 
     public static void main(String args[]) {
         System.out.println("****************************************");
         System.out.println("hello world!!!!");
-        System.out.println(doInt());
         System.out.println("****************************************");
     }
 }

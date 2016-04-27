@@ -15,7 +15,8 @@ public class AppTest {
 
     @Test
     public void testDoIt() throws Exception {
-
+        App app = new App();
+        Assert.assertEquals(app.method1(app.doInt()), "Less than 7");
     }
 
 }
