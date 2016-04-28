@@ -16,6 +16,6 @@ public class ServiceTest {
     @Test
     public void testServiceId() {
         Service s = new Service();
-        assertTrue(s.getServiceId() < 20);
+        assertTrue(s.getServiceId() < 15);
     }
 }
