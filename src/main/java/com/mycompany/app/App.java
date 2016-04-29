@@ -1,5 +1,5 @@
 package com.mycompany.app;
-
+// A comment
 import java.util.Random;
 
 public class App {
